@@ -4,6 +4,7 @@ import { GrSearch } from "react-icons/gr";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+
 const Header = () => {
   return (
     <header className='h-16 shadow-md bg-white'>
