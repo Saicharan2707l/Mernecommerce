@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import signin from '../assest/signin.gif'
 import { FaEye } from "react-icons/fa";
 import { useState } from 'react';
 import { FaEyeSlash } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+import summaryApi from '../common/index'
+import { toast } from 'react-toastify';
+import Context from '../context';
+
 const Login = () => {
   const [showpasswod,setpassword]=useState(false);
   const [data,setData]=useState(
-    {
+  {
     email:"",
     password:""
   }
 )
+  const navigate = useNavigate()
+  const { fetchUserDetails }=useContext(Context)
+  console.log("fetchuserDetails",fetchUserDetails)
 const handleOnChange = (e) =>{
   const { name , value } = e.target
   setData((preve)=>{
@@ -21,7 +28,28 @@ const handleOnChange = (e) =>{
       }
   })
 }
-  console.log("hfsgwcvhjbkjke"+data)
+const handleSubmit=async(e)=>{
+  e.preventDefault();
+  const dataResponse = await fetch(summaryApi.signIn.url, {
+      method: summaryApi.signIn.method,
+      credentials:'include',
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(data),
+    })
+    const dataapi = await dataResponse.json()
+    if(dataapi.success){
+      toast.success(dataapi.message)
+      fetchUserDetails()
+      navigate('/')
+      
+    }
+    if(dataapi.error){
+      toast.error(dataapi.message)
+    }
+}
+  console.log("hfsgwcvhjbkjke",data)
   return (
     <section id='login'>
       <div className='mx-auto container p-4'>
@@ -29,7 +57,7 @@ const handleOnChange = (e) =>{
           <div className='w-20 h-20 mx-auto '>
             <img src={signin} alt='login icons'/>
           </div>
-          <form className='pt-4'>
+          <form className='pt-4' onSubmit={handleSubmit}>
             <div className='grid'>
               <label>Email</label>
             <div className='bg-slate-100'>
