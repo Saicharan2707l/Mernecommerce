@@ -10,3 +10,9 @@
 .userTable td{
     @apply border text-center 
 }
+
+/** Overflow hidden**/
+
+.scrollbar-none::-webkit-scrollbar{
+    display: none;
+}

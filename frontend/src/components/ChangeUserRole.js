@@ -29,7 +29,6 @@ const ChangeUserRole = ({
       })
     })
     const DataResponse=await fetchDataResponse.json()
-    console.log("User DetailsDataResponse",DataResponse)
     if(DataResponse.success){
       toast.success(DataResponse.message)
       onClose()

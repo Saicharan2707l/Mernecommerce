@@ -7,17 +7,21 @@ import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
 import summaryApi from '../common';
 import { toast } from 'react-toastify';
-const UploadProducts = ({ 
-    onClose,fetchAllproduct
+
+const AdminEditProduct = ({
+    onClose,
+    ProductData,
+    fetchAllproduct
 }) => {
     const [data, setData] = useState({
-        productName: "",
-        brandName: "",
-        category: "",
-        productImage: [],
-        description: "",
-        price: "",
-        selling: ""
+        ...ProductData,
+        productName: ProductData?.productName,
+        brandName: ProductData?.brandName,
+        category: ProductData?.category,
+        productImage: ProductData?.productImage || [],
+        description: ProductData?.description,
+        price: ProductData?.price,
+        selling: ProductData?.selling
     })
     
     const handleOnChange = (e) => {
@@ -41,7 +45,6 @@ const UploadProducts = ({
                 productImage: [...preve.productImage, uploadImageCloudinary.url]
             }
         })
-    //   console.log("upload image cloudinary url", uploadImageCloudinary.url)
     }
     const handleDeleteProductImage=async(index)=>{
         const newProductImage=[...data.productImage]
@@ -56,8 +59,8 @@ const UploadProducts = ({
     }
     const handleSubmit=async(e)=>{
         e.preventDefault()
-        const dataresponse=await fetch(summaryApi.uploadProduct.url,{
-            method:summaryApi.uploadProduct.method,
+        const dataresponse=await fetch(summaryApi.updateProduct.url,{
+            method:summaryApi.updateProduct.method,
             credentials:'include',
             headers:{
                 'content-type':'application/json'
@@ -65,7 +68,6 @@ const UploadProducts = ({
             body:JSON.stringify(data)
         })
         const responsedata= await dataresponse.json();
-        console.log("The response data is",responsedata)
         if(responsedata.success){
             toast.success(responsedata.message)
             onClose()
@@ -75,11 +77,11 @@ const UploadProducts = ({
             toast.error(responsedata.error)
         }
     }
-    return (
-        <div className='fixed w-full h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
+  return (
+    <div className='fixed w-full h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
             <div className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden'>
                 <div className='flex justify-between items-center pb-3'>
-                    <h2 className='font-bold text-lg'>Upload Product</h2>
+                    <h2 className='font-bold text-lg'>Edit Product</h2>
                     <div className='w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer' onClick={onClose}>
                         <CgClose/>
                     </div>
@@ -136,7 +138,7 @@ const UploadProducts = ({
                                     <div className='text-slate-500 flex-col items-center justify-center flex'>
                                         <span className='text-3xl'><FaCloudUploadAlt /></span>
                                         <p className='text-xm'>Upload Product Image</p>
-                                        <input type='file' id='uploadProductImage' className='hidden' onChange={handleUploadProduct} required></input>
+                                        <input type='file' id='uploadProductImage' name='uploadProductImage' className='hidden' onChange={handleUploadProduct}></input>
                                     </div>                    
                                 </div>
                             </label>
@@ -219,7 +221,7 @@ const UploadProducts = ({
                                 type='submit'
                                 className='mb-10 bg-red-600 text-white py-2 px-4 rounded hover:bg-red-800 w-full'
                             >
-                                Add Product
+                                Edit Product
                             </button>
                         </div>
                         
@@ -234,6 +236,7 @@ const UploadProducts = ({
                           )
         }
         </div>
-    )
+  )
 }
-export default UploadProducts
+
+export default AdminEditProduct

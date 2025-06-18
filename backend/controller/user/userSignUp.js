@@ -1,4 +1,4 @@
-const userModel = require('../models/userModel');
+const userModel = require('../../models/userModel');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
@@ -23,7 +23,7 @@ async function userSignupController(req, res) {
     }
     // Generate a salt and hash the password
     const salt = bcrypt.genSaltSync(10);
-    const hashpassword =await  bcrypt.hashSync(password, salt);
+    const hashpassword = await bcrypt.hashSync(password, salt);
     if (!hashpassword) {
       throw new Error("Password is invalid");
     }
@@ -56,4 +56,5 @@ async function userSignupController(req, res) {
     });
   }
 }
+
 module.exports = userSignupController;

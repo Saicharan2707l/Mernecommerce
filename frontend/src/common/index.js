@@ -23,6 +23,58 @@ const summaryApi={
     update_user:{
         url:`${backendDomain}/api/updateUser`,
         method:'post'
+    },
+    uploadProduct:{
+        url:`${backendDomain}/api/upload-product`,
+        method:'post'
+    },
+    allProducts:{
+        url:`${backendDomain}/api/getproducts`,
+        method:"get"
+    },
+    updateProduct:{
+        url:`${backendDomain}/api/update-product`,
+        method:"post"
+    },
+    categoryProduct:{
+        url:`${backendDomain}/api/getcategoryproduct`,
+        method:"get"
+    },
+    categoryProductWise:{
+        url:`${backendDomain}/api/categoryProduct`,
+        method:"post"
+    },
+    productDetails:{
+        url:`${backendDomain}/api//product-details`,
+        method:"post"
+    },
+    addToCart:{
+        url:`${backendDomain}/api/addToCart`,
+        method:"post"
+    },
+    countAddToCartProduct:{
+        url:`${backendDomain}/api/countAddToCartProduct`,
+        method:"get"
+    },
+    addToCartProductView:{
+        url:`${backendDomain}/api/viewProductCart`,
+        method:"get"
+    },
+    updateCartProduct:{
+        url:`${backendDomain}/api/update-cart-product`,
+        method:"post"
+    },
+    deletCartProduct:{
+        url:`${backendDomain}/api/delete-cart-product`,
+        method:"post"
+    },
+    searchProduct:{
+        url:`${backendDomain}/api/search`,
+        method:"get"
+    },
+    filterProduct:{
+        url:`${backendDomain}/api/filter-product`,
+        method:"post"
     }
 }
 export default summaryApi;

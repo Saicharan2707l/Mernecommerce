@@ -1,7 +1,6 @@
-const userModel = require("../models/userModel")
+const userModel = require('../../models/userModel');
 async function allUserDetails(req,res) {
     try{
-        console.log("All User Details Controller",req.userId)
         const allUserData=await userModel.find()
         res.json({
             message:"ALl USer Details",

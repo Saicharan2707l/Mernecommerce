@@ -7,7 +7,13 @@ import Signup from "../pages/Signup";
 import AdminPanel from "../pages/AdminPanel";
 import { AllUsers } from "../pages/AllUsers";
 import Products from "../pages/Products";
+import CategoryProduct from "../pages/CategoryProduct";
+import ProductCard from "../pages/ProductCard";
+import Cart from "../pages/Cart";
+import SearchProduct from "../pages/SearchProduct";
+
 const router=createBrowserRouter(
+
     [{
         path : "/",
         element:<App/>,
@@ -29,6 +35,22 @@ const router=createBrowserRouter(
             element:<Signup/>
         },
         {
+            path:"product-category/",
+            element:<CategoryProduct/>
+        },
+        {
+            path:"product/:id",
+            element:<ProductCard/>
+        },
+        {
+            path:"cart",
+            element:<Cart/>
+        },
+        {
+            path:"search",
+            element:<SearchProduct/>
+        },
+        {
             path:'admin-panel',
             element:<AdminPanel/>,
             children:
@@ -41,11 +63,10 @@ const router=createBrowserRouter(
                 path:"all-products",
                 element:<Products/>
             }
-
+            
         ]
-        }
+        },
         
-
 ]
     }]
 )

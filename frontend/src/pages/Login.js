@@ -17,8 +17,8 @@ const Login = () => {
   }
 )
   const navigate = useNavigate()
-  const { fetchUserDetails }=useContext(Context)
-  console.log("fetchuserDetails",fetchUserDetails)
+  const { fetchUserDetails,fetchUserAddToCart }=useContext(Context)
+  
 const handleOnChange = (e) =>{
   const { name , value } = e.target
   setData((preve)=>{
@@ -40,54 +40,73 @@ const handleSubmit=async(e)=>{
     })
     const dataapi = await dataResponse.json()
     if(dataapi.success){
-      toast.success(dataapi.message)
-      fetchUserDetails()
+      toast.success(dataapi.message)      
       navigate('/')
+      fetchUserDetails()
+      fetchUserAddToCart()
       
     }
     if(dataapi.error){
       toast.error(dataapi.message)
     }
 }
-  console.log("hfsgwcvhjbkjke",data)
   return (
-    <section id='login'>
-      <div className='mx-auto container p-4'>
-        <div className='bg-white pl-4 py-4 w-full max-w-md mx-auto rounded'>
-          <div className='w-20 h-20 mx-auto '>
-            <img src={signin} alt='login icons'/>
-          </div>
-          <form className='pt-4' onSubmit={handleSubmit}>
-            <div className='grid'>
-              <label>Email</label>
-            <div className='bg-slate-100'>
-              <input type="email" placeholder='Enter Email' onChange={handleOnChange} value={data.email} name='email' className='w-full h-full outline-none bg-transparent p-2'/>
-            </div>        
-            </div>
-            <div className='' >
-              <label>Password</label>
-              <div className='bg-slate-100 flex'>
-                <input type={showpasswod? "text":"password"} placeholder='Enter Password' onChange={handleOnChange} name='password' value={data.password} className='w-full h-full outline-none bg-transparent p-2'/>
-                <div className='cursor-pointer pt-2 pr-3'>
-                  <span className='text-xl pt-6' onClick={()=>setpassword(prev=>!prev)}>
-                    {
-                      showpasswod?(
-                        <FaEyeSlash />
-                      ):
-                      (
-                        <FaEye/>
-                      )
-                    }
-                  </span>
-                </div>                
-              </div>
-              <Link to={'/forgot-password'} className='hover:underline block w-fit ml-auto text-red-600 cursor-pointer'>Forgot password</Link>
-              <button className='bg-red-600 px-2 py-1 hover:bg-red-700  w-full max-w-[100px] hover:scale-110 rounded-full mx-auto block mt-4'>Login</button>
-            </div>
-          </form>
-          <p className='pl-2 '>Don't have an account ? <Link to={'/sign-up'} className='text-red-600 hover:text-red-600 hover:underline'>Signup</Link></p>
+    <section id='login' className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className='bg-white shadow-lg p-8 w-full max-w-md rounded-lg'>
+        <div className='w-24 h-24 mx-auto mb-4 flex items-center justify-center rounded-full bg-red-50 border-4 border-red-500'>
+          <img src={signin} alt='login icon' className="w-16 h-16 object-contain" />
         </div>
-      </div>        
+        <form className='space-y-6' onSubmit={handleSubmit}>
+          <div>
+            <label className="block mb-1 font-semibold">Email</label>
+            <div className='bg-slate-100 rounded-md'>
+              <input
+                type="email"
+                placeholder='Enter Email'
+                onChange={handleOnChange}
+                value={data.email}
+                name='email'
+                className='w-full h-12 outline-none bg-transparent p-3 rounded-md'
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block mb-1 font-semibold">Password</label>
+            <div className='bg-slate-100 rounded-md flex items-center'>
+              <input
+                type={showpasswod ? "text" : "password"}
+                placeholder='Enter Password'
+                onChange={handleOnChange}
+                name='password'
+                value={data.password}
+                className='w-full h-12 outline-none bg-transparent p-3 rounded-md'
+                required
+              />
+              <span
+                className='text-xl px-3 cursor-pointer flex items-center'
+                onClick={() => setpassword(prev => !prev)}
+              >
+                {showpasswod ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+            <div className="flex justify-end mt-1">
+              <Link to={'/forgot-password'} className='hover:underline text-red-600 text-sm'>Forgot password?</Link>
+            </div>
+          </div>
+          <button
+            className='bg-red-600 text-white font-semibold py-2 rounded-full w-full hover:bg-red-700 transition-all duration-200 shadow-md'
+          >
+            Login
+          </button>
+        </form>
+        <p className='mt-6 text-center text-gray-700'>
+          Don't have an account?{' '}
+          <Link to={'/sign-up'} className='text-red-600 hover:underline font-semibold'>
+            Signup
+          </Link>
+        </p>
+      </div>
     </section>
   )
 }
