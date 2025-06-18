@@ -1,4 +1,4 @@
-const backendDomain="http://localhost:8000"
+const backendDomain="https://mernecommerce-kmbn.onrender.com"
 const summaryApi={
     signUp:{
         url:`${backendDomain}/api/signup`,
