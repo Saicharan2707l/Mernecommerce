@@ -1,3 +1,32 @@
+
+## Folder Structure
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/your-repo.git
+cd EcommerceApplication
+```
+
+---
+
+### 2. Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in `/backend` (for local development):
+MONGODB_URL=your_mongodb_connection_string
+TOKEN_SECRET_KEY=your_jwt_secret
+FRONTEND_URL=http://localhost:3000
+NODE_ENV=development
+
 Start the backend server:
 
 ```bash
@@ -113,31 +142,3 @@ MIT
 - [Render](https://render.com/)
 
 ---
-
-## Folder Structure
-
----
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/yourusername/your-repo.git
-cd EcommerceApplication
-```
-
----
-
-### 2. Backend Setup
-
-```bash
-cd backend
-npm install
-```
-
-Create a `.env` file in `/backend` (for local development):
-MONGODB_URL=your_mongodb_connection_string
-TOKEN_SECRET_KEY=your_jwt_secret
-FRONTEND_URL=http://localhost:3000
-NODE_ENV=development
