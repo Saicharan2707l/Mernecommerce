@@ -50,6 +50,7 @@ async function userSignInController(req, res) {
     const tokenOption = {
       httpOnly: true, // Prevents client-side JS from reading the token
       secure: process.env.NODE_ENV === "production", // Ensures cookie is sent only over HTTPS
+      sameSite: "none" // <--- ADD THIS
     };
     // Set token in cookies and send response
     res.cookie("token", token, tokenOption).status(200).json({
