@@ -79,11 +79,11 @@ const CategoryProduct = () => {
 
   return (
     <div className='mx-auto container p-4'>
-      {/**desktop version */}
-      <div className='hidden lg:grid grid-cols-[260px,1fr] gap-8'>
-        {/**left side */}
-        <div className='bg-white p-4 min-h-[calc(100vh-140px)] rounded-xl shadow-md'>
-          {/**sortby */}
+      {/* Responsive layout: mobile/tablet (flex-col), desktop (grid) */}
+      <div className='flex flex-col gap-6 lg:grid lg:grid-cols-[260px,1fr] lg:gap-8'>
+        {/* Sidebar: Sort/Filter */}
+        <div className='bg-white p-4 rounded-xl shadow-md min-h-[120px] lg:min-h-[calc(100vh-140px)] w-full max-w-md mx-auto lg:mx-0'>
+          {/* Sort by */}
           <div className='mb-6'>
             <h3 className='text-lg uppercase font-medium text-slate-500 border-b pb-1 border-slate-800'>Sort by</h3>
             <form className='text-sm flex flex-col gap-2 py-2'>
@@ -97,8 +97,7 @@ const CategoryProduct = () => {
               </div>
             </form>
           </div>
-
-          {/**Filter by*/}
+          {/* Filter by */}
           <div>
             <h3 className='text-lg uppercase font-medium text-slate-500 border-b pb-1 border-slate-800'>Filter by</h3>
             <form className='text-sm flex flex-col gap-2 py-2'>
@@ -115,14 +114,19 @@ const CategoryProduct = () => {
             </form>
           </div>
         </div>
-        {/**right side */}
+        {/* Product grid */}
         <div className='flex justify-center w-full'>
-          <div className='bg-white rounded-xl shadow-md p-6 w-full max-w-7xl mx-auto'>
+          <div className='bg-white rounded-xl shadow-md p-4 sm:p-6 w-full max-w-7xl mx-auto'>
             <p className='text-slate-800 text-lg font-medium mb-4'>Search Results: {data.length}</p>
-            <div className='min-h-[calc(100vh-180px)] px-2'>
+            <div className='min-h-[200px] px-0 sm:px-2'>
               {
                 data.length !== 0 && !loading && (
                   <VerticalCard data={data} loading={loading} />
+                )
+              }
+              {
+                data.length === 0 && !loading && (
+                  <p className='text-center text-slate-500 py-8'>No products found for the selected category.</p>
                 )
               }
             </div>
