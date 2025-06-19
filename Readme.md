@@ -120,11 +120,6 @@ The frontend will run on [http://localhost:3000](http://localhost:3000) by defau
 
 ---
 
-## 👨‍💻 Author
-
-Sai Charan Lenkalapally
-
----
 
 ## 📜 License
 
